@@ -8,8 +8,7 @@ import constants
 class Gambusino:
 
     def __init__(self, id_num, team, iaSourceFileName):
-        print "Creating gambusino with ia %s" % (iaSourceFileName)
-        """Note: iaSourcePath must be a filename with .py extension and \
+        """Note: iaSourcePath must be a filename with .py extension and
         WITHOUT a path and must be located in the ia subfolder of the game.
         Right: 'ia01.py', 'advancedexplorer.py', etc.
         Wrong: '/home/mike/myIAs/ia01.py, C:/IAs/herculesv3.py, etc.'"""
@@ -22,7 +21,6 @@ class Gambusino:
         self.team = team
         self.ia = imp.load_source(iaSourceFileName.partition('.py')[0],
         'ia/' + iaSourceFileName)
-        print self.ia.name
         self.memory = None
 
     def changeFood(self, n):
@@ -55,5 +53,3 @@ class Gambusino:
         movement, self.memory = self.ia.think(self.age, self.health, self.food,
         self.memory, mapSight)
         self.move(movement)
-        print "Gambusino %d (team %d) with IA %s has decided to move %s" \
-        %(self.id_num, self.team, self.ia.name, movement)

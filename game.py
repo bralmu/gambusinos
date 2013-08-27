@@ -160,15 +160,18 @@ def refreshTheMap():
 
 
 if __name__ == "__main__":
-    theMap = gamemap.GameMap(constants.DEFAULT_MAP_HEIGHT,
-constants.DEFAULT_MAP_WIDTH)
+    gambusinosperteam = 10
     ia1 = 'ia03.py'
     ia2 = 'ia02.py'
-    print "Selected ias are %s and %s"%(ia1, ia2)
-    createGambusinos(ia1, ia2, 5)
+    mapwidth = constants.DEFAULT_MAP_WIDTH
+    mapheight = constants.DEFAULT_MAP_HEIGHT
+    theMap = gamemap.GameMap(mapwidth, mapheight)
+    createGambusinos(ia1, ia2, gambusinosperteam)
     pygame.init()
-    window = pygame.display.set_mode((640, 480))
+    window = pygame.display.set_mode((mapwidth * 10, mapheight * 10))
     drawMap(window)
+    print "Focus the game window and press any key to run a round\n\
+Close the window to the end the game."
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

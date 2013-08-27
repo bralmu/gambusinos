@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 
-name = 'Stupid hungry'
+name = 'Stupid but hungry'
 autor = 'Bruno A.'
 description = 'This is a basic IA example that follows the nearest food.'
 

@@ -38,8 +38,8 @@ class GameMap:
         range(self.width)]
         self.terrainLayer = [[0 for i in range(self.height)] for j in
         range(self.width)]
-        insertionsLeft = int(self.width * self.height / 100 *
-        constants.MAX_FOOD_SOURCES)
+        insertionsLeft = int(self.width * self.height *
+        constants.MAX_FOOD_SOURCES / 100)
         while (insertionsLeft > 0):
             foodQuantity = random.randint(constants.FOOD_SOURCE_MIN_Q,
             constants.FOOD_SOURCE_MAX_Q)
@@ -48,3 +48,15 @@ class GameMap:
             if self.terrainLayer[posX][posY] == 0:
                 self.terrainLayer[posX][posY] = foodQuantity
                 insertionsLeft -= 1
+            #print "inserting %d in (%d, %d)" % (foodQuantity, posX, posY)
+        #print "Terrain layer:"
+        #self.debugDraw(self.terrainLayer)
+
+    def debugDraw(self, matriz):
+        string = "------------\n"
+        for y in range(len(matriz[0])):
+            for x in range(len(matriz)):
+                string += "(%d, %d):%d " % (x, y, matriz[x][y])
+            string += "\n"
+        string += "------------"
+        print string

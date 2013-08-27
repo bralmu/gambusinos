@@ -15,8 +15,8 @@ MOVEMENTS = {'N': (0, -1), 'S': (0, 1), 'E': (1, 0), 'W': (-1, 0),
 # Map generation sizes
 MIN_MAP_HEIGHT = 8
 MIN_MAP_WIDTH = 8
-DEFAULT_MAP_HEIGHT = 64
-DEFAULT_MAP_WIDTH = 48
+DEFAULT_MAP_HEIGHT = 48
+DEFAULT_MAP_WIDTH = 64
 # Percentage of map squares occupied by food sources on map generation [0,100]
 MAX_FOOD_SOURCES = 15
 # Every food occupied square generated at the game start will contain a
