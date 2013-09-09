@@ -61,11 +61,37 @@ def drawMap(window):
     pygame.display.flip()
 
 
+def drawInfo(window, xstart):
+    sumHealthTeam1 = 0
+    sumHealthTeam2 = 0
+    team1count = 0
+    team2count = 0
+    for g in gambusinos:
+        team = gambusinos[g].team
+        health = gambusinos[g].health
+        if team == 1:
+            sumHealthTeam1 += health
+            team1count += 1
+        elif team == 2:
+            sumHealthTeam2 += health
+            team2count += 1
+    text = "TEAM 1: %d (%d)" % (team1count, sumHealthTeam1)
+    myfont = pygame.font.SysFont("monospace", 15)
+    label = myfont.render(text, 1, (255, 0, 0))
+    window.blit(label, (xstart, 50))
+    text = "TEAM 2: %d (%d)" % (team2count, sumHealthTeam2)
+    myfont = pygame.font.SysFont("monospace", 15)
+    label = myfont.render(text, 1, (0, 0, 255))
+    window.blit(label, (xstart, 80))
+    pygame.display.flip()
+
+
 def runRound():
     itsTimeToMoveGambus()
     solveCollitions()
     killUnhealthyOnes()
     timeToEat()
+    print '%d gambusinos left'%(len(gambusinos))
 
 
 def itsTimeToMoveGambus():
@@ -168,8 +194,10 @@ if __name__ == "__main__":
     theMap = gamemap.GameMap(mapwidth, mapheight)
     createGambusinos(ia1, ia2, gambusinosperteam)
     pygame.init()
-    window = pygame.display.set_mode((mapwidth * 10, mapheight * 10))
+    window = pygame.display.set_mode((mapwidth * 10 + 200, mapheight * 10))
+    window.fill((200, 255, 200))
     drawMap(window)
+    drawInfo(window, mapwidth * 10)
     print "Focus the game window and press any key to run a round\n\
 Close the window to the end the game."
     while True:
@@ -179,6 +207,8 @@ Close the window to the end the game."
             elif event.type == pygame.KEYDOWN:
                 runRound()
                 refreshTheMap()
+                window.fill((200, 255, 200))
                 drawMap(window)
+                drawInfo(window, mapwidth * 10)
             #else:
             #    print event

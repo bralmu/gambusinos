@@ -1,3 +1,14 @@
 Gambusinos project.
 
 An IA game for python programmers.
+
+Status:
+The game is far from being playable yet.
+Currently working in the backend.
+
+Requirements:
+- Python 2.7
+- Pygame (sudo apt-get install python-pygame)
+
+Author:
+Bruno A.
