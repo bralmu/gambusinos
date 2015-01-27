@@ -1,5 +1,5 @@
 #-*- coding: utf-8 -*-
-"""Class MapSight represents what a Gambusino can see in each round"""
+"""A MapSight represents what a Gambusino can see in each round"""
 
 
 class MapSight:

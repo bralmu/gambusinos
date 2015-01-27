@@ -1,17 +1,26 @@
 #-*- coding: utf-8 -*-
 """Game constants"""
 
-MAX_AGE = 100  # The age a gambusino dies.
-MAX_HEALTH = 100  # Maximum health points for gambusinos.
-MAX_FOOD = 100  # Maximum food (energy) a gambusino can store.
+# The age a gambusino dies.
+MAX_AGE = 100
+# Maximum health points for gambusinos.
+MAX_HEALTH = 100
+# Maximum food (energy) a gambusino can store.
+MAX_FOOD = 100
 INITIAL_AGE = 0
 INITIAL_HEALTH = 100
 INITIAL_FOOD = 20
-NO_FOOD_PENALTY = -5  # Health points lost if a gambusino has zero food
-ROUND_FOOD_COST = -1  # Food lost in each round
-MOVEMENT_FOOD_COST = -1  # Food lost if the gambusino decides to move in a round
-MOVEMENTS = {'N': (0, -1), 'S': (0, 1), 'E': (1, 0), 'W': (-1, 0),
-            'NONE': (0, 0)}  # Valid movements. NONE to skip movement.
+# Health points lost if a gambusino has zero food
+NO_FOOD_PENALTY = -5
+# Gambusino food change applied in each round
+ROUND_FOOD_COST = -1
+# Gambusino food change if the gambusino decides to move in a round
+MOVEMENT_FOOD_COST = -1
+# Some verbal movements. NONE to skip movement.
+MOVEMENTS = {
+    'NONE': -1, 'N': 0, 'S': 180, 'E': 90, 'W': 270, 'NE': 45, 
+    'SE': 135, 'SW': 225, 'NW': 315,
+}
 # Map generation sizes
 MIN_MAP_HEIGHT = 8
 MIN_MAP_WIDTH = 8

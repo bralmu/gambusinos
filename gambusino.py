@@ -4,6 +4,13 @@
 import imp
 import constants
 
+DEFAULT_AGE = constants.INITIAL_AGE
+DEFAULT_HEALTH = constants.INITIAL_HEALTH
+DEFAULT_FOOD = constants.INITIAL_FOOD
+DEFAULT_POS_X = 0.0
+DEFAULT_POS_Y = 0.0
+DEFAULT_MEMORY = None
+
 
 class Gambusino:
 
@@ -12,42 +19,39 @@ class Gambusino:
         WITHOUT a path and must be located in the ia subfolder of the game.
         Right: 'ia01.py', 'advancedexplorer.py', etc.
         Wrong: '/home/mike/myIAs/ia01.py, C:/IAs/herculesv3.py, etc.'"""
-        self.age = 0
-        self.health = 100
-        self.food = 20
-        self.posX = None
-        self.posY = None
+        self.age = DEFAULT_AGE
+        self.health = DEFAULT_HEALTH
+        self.food = DEFAULT_FOOD
+        self.posX = DEFAULT_POS_X
+        self.posY = DEFAULT_POS_Y
         self.id_num = id_num
         self.team = team
         self.ia = imp.load_source(iaSourceFileName.partition('.py')[0],
         'ia/' + iaSourceFileName)
-        self.memory = None
+        self.memory = DEFAULT_MEMORY
 
-    def changeFood(self, n):
+    def feed(self, n):
+        if n <= 0:
+            return 0
         addedFood = n
         initialFood = self.food
         self.food += n
         if self.food > 100:
             addedFood = 100 - initialFood
             self.food = 100
-        elif self.food < 0:
-            addedFood = 0
-            self.food = 0
-            self.changeHealth(constants.NO_FOOD_PENALTY)
         return addedFood
 
     def changeHealth(self, n):
         self.health += n
         if self.health < 0:
             self.health = 0
+        elif self.health > 100:
+            self.health = 100
 
     def move(self, movement):
-        if movement in constants.MOVEMENTS:
-            self.posX += constants.MOVEMENTS[movement][0]
-            self.posY += constants.MOVEMENTS[movement][1]
-        self.changeFood(constants.ROUND_FOOD_COST)
-        if movement != 'NONE':
-            self.changeFood(constants.MOVEMENT_FOOD_COST)
+        if movement <= 360 and movement >= 0:
+            # TODO change coordinates
+            self.feed(constants.MOVEMENT_FOOD_COST)
 
     def think(self, mapSight):
         movement, self.memory = self.ia.think(self.age, self.health, self.food,
