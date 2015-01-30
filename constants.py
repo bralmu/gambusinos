@@ -18,16 +18,16 @@ ROUND_FOOD_COST = -1
 MOVEMENT_FOOD_COST = -1
 # Some verbal movements. NONE to skip movement.
 MOVEMENTS = {
-    'NONE': -1, 'N': 0, 'S': 180, 'E': 90, 'W': 270, 'NE': 45, 
-    'SE': 135, 'SW': 225, 'NW': 315,
+    'NONE': -1, 'N': 90, 'S': 270, 'E': 0, 'W': 180, 'NE': 45, 
+    'SE': 315, 'SW': 225, 'NW': 135,
 }
 # Map generation sizes
 MIN_MAP_HEIGHT = 8
 MIN_MAP_WIDTH = 8
-DEFAULT_MAP_HEIGHT = 48
-DEFAULT_MAP_WIDTH = 64
-# Percentage of map squares occupied by food sources on map generation [0,100]
-MAX_FOOD_SOURCES = 15
+DEFAULT_MAP_HEIGHT = 10
+DEFAULT_MAP_WIDTH = 10
+# Food sources per 100m2 on map generation
+INITIAL_FOOD_SOURCES_DENSITY = .15
 # Every food occupied square generated at the game start will contain a
 # quantity of food in this range
 FOOD_SOURCE_MIN_Q = 10

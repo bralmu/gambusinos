@@ -3,6 +3,7 @@
 
 import imp
 import constants
+import math
 
 DEFAULT_AGE = constants.INITIAL_AGE
 DEFAULT_HEALTH = constants.INITIAL_HEALTH
@@ -18,12 +19,12 @@ class Gambusino:
         """Note: iaSourcePath must be a filename with .py extension and
         WITHOUT a path and must be located in the ia subfolder of the game.
         Right: 'ia01.py', 'advancedexplorer.py', etc.
-        Wrong: '/home/mike/myIAs/ia01.py, C:/IAs/herculesv3.py, etc.'"""
+        Wrong: '/home/mike/myIAs/ia01.py', 'C:/IAs/herculesv3.py', etc."""
         self.age = DEFAULT_AGE
         self.health = DEFAULT_HEALTH
         self.food = DEFAULT_FOOD
-        self.posX = DEFAULT_POS_X
-        self.posY = DEFAULT_POS_Y
+        self.pos_x = DEFAULT_POS_X
+        self.pos_y = DEFAULT_POS_Y
         self.id_num = id_num
         self.team = team
         self.ia = imp.load_source(iaSourceFileName.partition('.py')[0],
@@ -49,11 +50,15 @@ class Gambusino:
             self.health = 100
 
     def move(self, movement):
+        """ movement must have a value in range [0,360] or value -1
+        values [0,360] are gradian unit for movement direction
+        value -1 means lack of movement """
         if movement <= 360 and movement >= 0:
-            # TODO change coordinates
-            self.feed(constants.MOVEMENT_FOOD_COST)
+            self.pos_x += round(math.cos(math.radians(movement)), 2)
+            self.pos_y += round(math.sin(math.radians(movement)), 2)
 
-    def think(self, mapSight):
-        movement, self.memory = self.ia.think(self.age, self.health, self.food,
-        self.memory, mapSight)
+    def think_and_move(self, mapSight):
+        movement, self.memory = self.ia.think(
+            self.age, self.health, self.food, self.memory, mapSight
+            )
         self.move(movement)
